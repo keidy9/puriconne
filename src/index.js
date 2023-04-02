@@ -1,7 +1,9 @@
 const { Client, IntentsBitField } = require("discord.js");
+const express = require("express");
 const dotenv = require("dotenv");
 
 dotenv.config();
+const app = express();
 
 const client = new Client({
   intents: [
@@ -131,3 +133,12 @@ client.on("interactionCreate", (interaction) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+const port = 8080;
+app.get("/", (req, res) => {
+  res.send("Hello.");
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
